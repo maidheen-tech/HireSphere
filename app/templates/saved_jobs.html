@@ -1,0 +1,7 @@
+{% extends "dashboard_shell.html" %}
+{% from "macros.html" import job_card %}
+{% block title %}Saved jobs{% endblock %}
+{% block workspace %}
+<div class="workspace-header"><div><span class="eyebrow">A SHORTLIST FOR YOUR FUTURE</span><h1>Saved jobs</h1><p>Keep the opportunities you love close by.</p></div><a href="{{ url_for('main.jobs') }}" class="button button-primary">Discover roles <span>→</span></a></div>
+<div class="job-list">{% for job in jobs %}{{ job_card(job, true) }}{% else %}<div class="panel empty-state"><div class="empty-icon">♡</div><h3>Your shortlist starts here</h3><p>Save a job that catches your eye and find it here later.</p><a class="button button-outline" href="{{ url_for('main.jobs') }}">Browse jobs</a></div>{% endfor %}</div>
+{% endblock %}

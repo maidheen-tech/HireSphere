@@ -1,0 +1,6 @@
+{% extends "dashboard_shell.html" %}
+{% block title %}Notifications{% endblock %}
+{% block workspace %}
+<div class="workspace-header"><div><span class="eyebrow">A LITTLE UPDATE FOR YOU</span><h1>Notifications</h1><p>Important moments, all in one place.</p></div></div>
+<div class="notification-list">{% for item in notifications %}<article class="panel notification-card {% if not item.is_read %}unread{% endif %}"><span class="notification-icon">{% if not item.is_read %}✦{% else %}◦{% endif %}</span><div><h2>{{ item.title }}</h2><p>{{ item.body }}</p><time>{{ item.created_at[:16]|replace('T', ' ') }}</time></div>{% if not item.is_read %}<form method="post" action="{{ url_for('main.mark_notification_read', notification_id=item.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button button-outline button-small" type="submit">Mark as read</button></form>{% endif %}</article>{% else %}<div class="panel empty-state"><div class="empty-icon">✦</div><h3>You're all caught up</h3><p>We'll let you know when there's something new.</p></div>{% endfor %}</div>
+{% endblock %}

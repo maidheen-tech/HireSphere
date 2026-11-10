@@ -1,0 +1,7 @@
+{% extends "dashboard_shell.html" %}
+{% block title %}Application history{% endblock %}
+{% block workspace %}
+<div class="workspace-header"><div><span class="eyebrow">EVERY STEP OF THE JOURNEY</span><h1>Application history</h1><p>{{ application.title }} <span class="dot">·</span> {{ application.company_name }}</p></div><a class="text-link" href="{{ url_for('main.dashboard') }}">← Back to workspace</a></div>
+<div class="panel timeline-panel"><span class="eyebrow">STATUS UPDATES</span><div class="timeline">{% for item in history %}<article class="timeline-item"><span class="timeline-marker"></span><div><span class="status-pill status-{{ item.status|lower|replace(' ', '-') }}">{{ item.status }}</span><time>{{ item.created_at[:16]|replace('T', ' ') }}</time><p>{{ item.note or "Status updated by " + item.actor_name }}</p></div></article>{% else %}<div class="empty-state"><p>No status updates yet.</p></div>{% endfor %}</div></div>
+{% if notes %}<div class="panel notes-panel"><span class="eyebrow">PRIVATE RECRUITER NOTES</span>{% for note in notes %}<article><p>{{ note.note }}</p><small>{{ note.full_name }} · {{ note.created_at[:16]|replace('T', ' ') }}</small></article>{% endfor %}</div>{% endif %}
+{% endblock %}

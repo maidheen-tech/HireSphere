@@ -1,0 +1,17 @@
+{% macro job_card(job, compact=false) %}
+<article class="job-card">
+  {% if job.company_logo %}<img class="company-symbol company-symbol-image" src="{{ url_for('main.company_logo', company_id=job.company_id) }}" alt="{{ job.company_name }} logo">{% else %}<div class="company-symbol">{{ job.company_name[:1]|upper }}</div>{% endif %}
+  <div class="job-card-main">
+    <div class="job-card-top"><span class="eyebrow">{{ job.category }}</span><span class="job-date">{{ job.created_at[:10] }}</span></div>
+    <h3><a href="{{ url_for('main.job_detail', job_id=job.id) }}">{{ job.title }}</a></h3>
+    <p class="muted">{{ job.company_name }} <span class="dot">·</span> {{ job.location }}</p>
+    {% if not compact %}<p class="job-excerpt">{{ job.description|truncate(135) }}</p>{% endif %}
+    <div class="tag-row"><span class="tag">{{ job.job_type }}</span>{% if job.experience_level %}<span class="tag">{{ job.experience_level }}</span>{% endif %}</div>
+  </div>
+  <div class="job-card-side"><strong>{% if job.salary_min %}${{ "{:,.0f}".format(job.salary_min // 1000) }}k{% else %}Competitive{% endif %}</strong><span class="muted">annual salary</span><a class="text-link" href="{{ url_for('main.job_detail', job_id=job.id) }}">View role <span>→</span></a></div>
+</article>
+{% endmacro %}
+
+{% macro stat_card(label, value, note, icon) %}
+<article class="stat-card"><div class="stat-icon">{{ icon }}</div><p>{{ label }}</p><strong>{{ value }}</strong><span>{{ note }}</span></article>
+{% endmacro %}

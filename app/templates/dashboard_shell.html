@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="workspace-layout">
+  <aside class="workspace-sidebar">
+    <div class="workspace-person"><div class="workspace-avatar">{{ current_user.full_name[:1]|upper }}</div><span><b>{{ current_user.full_name }}</b><small>{{ current_user.role|title }} workspace</small></span></div>
+    <span class="sidebar-label">WORKSPACE</span>
+    {% if current_user.role == 'candidate' %}
+      <a class="sidebar-link {% if request.endpoint == 'main.candidate_dashboard' %}active{% endif %}" href="{{ url_for('main.candidate_dashboard') }}"><span>◫</span> Overview</a>
+      <a class="sidebar-link {% if request.endpoint == 'main.candidate_profile' %}active{% endif %}" href="{{ url_for('main.candidate_profile') }}"><span>◉</span> My profile</a>
+      <a class="sidebar-link {% if request.endpoint == 'main.candidate_applications' %}active{% endif %}" href="{{ url_for('main.candidate_applications') }}"><span>▤</span> Applications</a>
+      <a class="sidebar-link {% if request.endpoint == 'main.candidate_saved' %}active{% endif %}" href="{{ url_for('main.candidate_saved') }}"><span>♡</span> Saved jobs</a>
+      <a class="sidebar-link" href="{{ url_for('main.jobs') }}"><span>⌕</span> Browse jobs</a>
+    {% elif current_user.role == 'recruiter' %}
+      <a class="sidebar-link {% if request.endpoint == 'main.recruiter_dashboard' %}active{% endif %}" href="{{ url_for('main.recruiter_dashboard') }}"><span>◫</span> Overview</a>
+      <a class="sidebar-link" href="{{ url_for('main.recruiter_job_new') }}"><span>＋</span> Post a job</a>
+      <a class="sidebar-link {% if request.endpoint == 'main.recruiter_company' %}active{% endif %}" href="{{ url_for('main.recruiter_company') }}"><span>▦</span> Company profile</a>
+    {% else %}
+      <a class="sidebar-link {% if request.endpoint == 'main.admin_dashboard' %}active{% endif %}" href="{{ url_for('main.admin_dashboard') }}"><span>◫</span> Overview</a>
+      <a class="sidebar-link" href="{{ url_for('main.admin_export') }}"><span>⇩</span> Export report</a>
+    {% endif %}
+    <span class="sidebar-label sidebar-label-lower">ACCOUNT</span>
+    <a class="sidebar-link {% if request.endpoint == 'main.notifications' %}active{% endif %}" href="{{ url_for('main.notifications') }}"><span>♧</span> Notifications {% if unread_count %}<i class="sidebar-count">{{ unread_count }}</i>{% endif %}</a>
+    <a class="sidebar-link {% if request.endpoint == 'main.settings' %}active{% endif %}" href="{{ url_for('main.settings') }}"><span>⚙</span> Settings</a>
+    <div class="sidebar-bottom"><div class="sidebar-help"><span>✦</span><b>Need a hand?</b><p>Our team is here to help you move forward.</p><a href="{{ url_for('main.contact') }}">Get in touch →</a></div><div class="sidebar-meta">HIRESPHERE <span>v1.0</span></div></div>
+  </aside>
+  <section class="workspace-main">{% block workspace %}{% endblock %}</section>
+</div>
+{% endblock %}

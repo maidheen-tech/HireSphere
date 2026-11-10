@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<section class="page-hero legal-hero"><div class="content-width"><span class="eyebrow">CLEAR EXPECTATIONS, BETTER CONNECTIONS</span><h1>{{ title }}.</h1><p>Last updated November 10, 2026</p></div></section><section class="section legal-copy"><aside><span class="eyebrow">IN THIS DOCUMENT</span><a href="#overview">Overview</a><a href="#information">Information</a><a href="#accounts">Your account</a><a href="#responsibilities">Responsibilities</a><a href="#contact">Contact</a></aside><article>
+{% if privacy %}
+<h2 id="overview">Your privacy matters</h2><p>This policy explains how HireSphere handles information when you use this recruitment and applicant-tracking service. This portfolio application is a demonstration; do not submit sensitive personal information.</p>
+<h2 id="information">Information we collect</h2><p>Account details such as your name, email, and password hash; profile details you provide; resumes and job applications; and basic service activity needed to operate the platform. Passwords are stored as salted hashes.</p>
+<h2 id="accounts">How information is used</h2><p>We use information to provide job search, application, recruiter, and administrative functionality. Candidate profile information is shared with a recruiter when you apply to that recruiter's job. Uploaded resumes are restricted to their owner and recruiters handling the candidate's applications.</p>
+<h2 id="responsibilities">Your choices and security</h2><p>You may update profile details, remove a resume, change your password, or deactivate your account. We use reasonable safeguards, but no internet service can promise perfect security. In this demo, uploaded files and the SQLite database are stored on the host machine.</p>
+{% else %}
+<h2 id="overview">Using HireSphere</h2><p>HireSphere helps candidates discover roles and recruiters manage hiring workflows. By using the service, you agree to use it lawfully, provide accurate information, and respect other users.</p>
+<h2 id="information">Accounts and eligibility</h2><p>Keep your login credentials secure and notify the service operator if you believe your account is compromised. Recruiters are responsible for the accuracy and fairness of their job postings. Candidates are responsible for the information they submit.</p>
+<h2 id="accounts">Applications and content</h2><p>You retain responsibility for the content you upload. You grant the service permission to process that content solely to deliver the features you request. Do not post unlawful, discriminatory, misleading, or abusive content.</p>
+<h2 id="responsibilities">Availability and limitations</h2><p>This project is a demonstration application and is provided without a production availability commitment. The platform operator may suspend access to protect users or the service. These terms do not replace any rights that cannot be waived under applicable law.</p>
+{% endif %}
+<h2 id="contact">Questions?</h2><p>Reach our team through the <a href="{{ url_for('main.contact') }}">contact page</a>. For production use, have these policies reviewed and adapted to your organization's legal and privacy requirements.</p></article></section>
+{% endblock %}

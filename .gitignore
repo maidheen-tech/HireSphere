@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.py[cod]
+instance/*
+!instance/.gitkeep
+.venv/
+.pytest_cache/
